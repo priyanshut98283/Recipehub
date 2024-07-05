@@ -1,7 +1,9 @@
-set -e
+# Use a specific Python version if needed
+PYTHON=$(which python3)
+PIP=$(which pip3)
 
 # Install Python dependencies
-python3 -m pip install -r requirements.txt
+$PIP install -r requirements.txt
 
 # Collect static files
-python3 manage.py collectstatic --noinput
+$PYTHON manage.py collectstatic --noinput
