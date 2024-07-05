@@ -1,0 +1,73 @@
+{% extends "baseRecipe.html" %} 
+<!-- In above line we can import any base file from any app...(name should be different) -->
+{% block start %}
+<div class="container mt-5" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+    <form class="col-6 mx-auto p-3 shadow" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!--It checks if data is on same server page or not... -->
+        <div class="mb-3">
+          {% if messages %}
+            <div class="messages mb-3 text-center alert alert-danger" id="message">
+                {% for message in messages %}
+                <h5{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h5>
+                {% endfor %}
+            </div>
+            {% endif %}
+          <label for="recipe name" class="form-label">Recipe name</label>
+          <input type="text" class="form-control" name="recipe_name" required>
+          <div id="info" class="form-text">Enter delicious recipes here!😋🥗</div>
+        </div>
+        <div class="mb-3">
+          <label for="recipe description" class="form-label">Recipe Description</label>
+          <textarea class="form-control" name="recipe_description" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="recipe image" class="form-label">Recipe Image</label>
+            <input type="file" class="form-control" name="recipe_image" ></input>
+          </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="terms" required>
+          <label class="form-check-label" for="exampleCheck1"><a href="/termsAndConditions/">Agree to terms and conditions.</a></label>
+        </div>
+        <button type="submit" class="btn btn-success">Add Recipe</button>
+      </form>
+      <hr>
+      <div class="mt-5">
+        <div class="mx-auto col-6">
+            <form>
+            <div class="mb-3 form-check">
+                <label class="form-check-label" for="exampleCheck1">Search Food</label>
+                <input type="text" class="form-text form-control" name="search" >
+                <button type="submit" class="btn btn-primary mt-4">Search</button>
+            </div>
+        </form>
+        </div>
+      </div>
+
+      <table class="table table-bordered border-dark mt-lg-5 shadow " style="font-family: Georgia, 'Times New Roman', Times, serif;">
+        <thead>
+          <tr>
+            <th scope="col">S.No.</th>
+            <th scope="col">Recipe Name</th>
+            <th scope="col">Recipe Description</th>
+            <th scope="col">Recipe Image</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for recipe in recipes %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{recipe.recipe_name}}</td>
+            <td>{{recipe.recipe_description}}</td>
+            <td><img src="/media/{{recipe.recipe_image}}" style="height: 200px;width: 200px;"></td>
+            <td><a href="/delete-recipes/{{recipe.id}}/" class="btn btn-danger">Delete </a>
+                <a href="/update-recipes/{{recipe.id}}/" class="btn btn-success mt-2">Update</a>
+            </td>
+            <!-- <td></td> -->
+        </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+{% endblock %}

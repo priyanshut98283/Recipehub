@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Project</title>
+</head>
+<body>
+    <h1 style="text-align: center;color: blueviolet;">About Multiverse
+        <div style="float: right;display: flex;">
+                <!-- Static Links-> -->
+              <a href="/">
+                Home
+              </a>&nbsp;&nbsp;
+              <a href="/contact/">
+                Contact
+              </a>    
+              </div>
+</h1>
+    <hr>
+    <h3 style="color: cornflowerblue;">{{text}}</h3>
+    <!-- Below code will only show 100 characters...
+    Built-in template tags and filters-> https://docs.djangoproject.com/en/5.0/ref/templates/builtins/
+     -->
+    <!-- <h3 style="color: cornflowerblue;">{{text|truncatechars:100}}</h3> -->
+
+    <!-- Below code will use in filter... -->
+    <p>
+    {% if "palak" in vegetables %}
+            👍Palak Available
+    {% elif "tomato" in vegetables %}
+            👍Tomato Available
+    {% elif "brinjal" in vegetables %}
+            👍Brinjal Available
+    {% elif "potato" in vegetables %}
+            👍Potato Available
+    {% else %}
+             ❗Not available❗
+    {% endif %}
+    </p>
+</body>
+</html>
